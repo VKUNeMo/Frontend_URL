@@ -1,0 +1,44 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import "./about.css"
+import Group from "./Group";
+function PageAbout() {
+    const listFeature = ['Chatbot', 'Tiền xử lí', 'NER', 'POS']
+    const [currentIndex, setCurrentIndex] = useState(0);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % listFeature.length);
+        }, 3000); // Appear for 1s and disappear for 1s, so 2s interval
+
+        return () => clearInterval(interval);
+    }, [currentIndex]);
+    return (
+        <>
+            <div>
+                <div className="flex justify-center items-center flex-col h-screen">
+                    <div className="bg-about w-full h-screen"></div>
+                    <div className="flex justify-center items-center flex-col h-full w-full">
+                        <div className="flex flex-row justify-center w-1/2" >
+                            <span className=" uppercase text-white text-5xl  font-medium font-about  mr-2"> NLP  eSTI:
+
+                            </span>
+                            {
+                                (
+                                    <span className="w-fittransition-opacity duration-1000 opacity-100 animate-fade-in uppercase text-white text-5xl font-medium font-about">
+                                        {listFeature[currentIndex]}
+                                    </span>
+                                )
+                            }
+                        </div>
+                        <div className="text-center text-white mt-4">
+                            <span>Xử lí ngôn ngữ tự nhiên dành riêng cho tiếng Việt</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <Group></Group>
+        </>
+    )
+}
+export default PageAbout
